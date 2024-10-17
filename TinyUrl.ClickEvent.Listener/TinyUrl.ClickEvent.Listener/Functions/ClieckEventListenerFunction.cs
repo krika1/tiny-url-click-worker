@@ -7,12 +7,12 @@ namespace TinyUrl.ClickEvent.Listener.Functions
     public class ClieckEventListenerFunction
     {
         private readonly ILogger _logger;
-        private readonly IUrlMappingService _urlMappingService;
+        private readonly IDatabaseUpdaterService _databaseUpdaterService;
 
-        public ClieckEventListenerFunction(ILoggerFactory loggerFactory, IUrlMappingService urlMappingService)
+        public ClieckEventListenerFunction(ILoggerFactory loggerFactory, IDatabaseUpdaterService databaseUpdaterService)
         {
             _logger = loggerFactory.CreateLogger<ClieckEventListenerFunction>();
-            _urlMappingService = urlMappingService;
+            _databaseUpdaterService = databaseUpdaterService;
         }
 
         [Function("ClieckEventListenerFunction")]
@@ -20,7 +20,7 @@ namespace TinyUrl.ClickEvent.Listener.Functions
         {
             _logger.LogInformation($"C# Queue trigger function processed: {item}");
 
-            await _urlMappingService.UpdateUrlClicksAsync(item);
+            await _databaseUpdaterService.UpdateUrlClicksAsync(item);
         }
     }
 }

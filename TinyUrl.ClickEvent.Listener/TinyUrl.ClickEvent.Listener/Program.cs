@@ -16,7 +16,7 @@ var host = new HostBuilder()
 
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
-        services.AddScoped<IUrlMappingService, UrlMappingService>();
+        services.AddScoped<IDatabaseUpdaterService, DatabaseUpdaterService>();
 
         services.Configure<MongoDbOptions>(configuration.GetSection("MongoDbOptions"));
 
